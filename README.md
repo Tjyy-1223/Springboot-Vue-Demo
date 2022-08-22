@@ -61,3 +61,17 @@ npm run serve
 + 搭建springboot项目
 + 配置相关pom文件和yml配置文件
 + vue与springboot同时启动
+
+
+
+
+
+#### 6 SpringBoot集成Mybatis实现数据查询
+
++ 创建数据库表user2
++ 创建对应user2的实体类 User
++ 构建对应的Mapper、Service等实现代码
++ 完成Mybatis数据查询功能
+
+
+
