@@ -58,3 +58,6 @@ npm run serve
 
 #### 5 Springboot框架搭建
 
++ 搭建springboot项目
++ 配置相关pom文件和yml配置文件
++ vue与springboot同时启动
