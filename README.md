@@ -113,6 +113,8 @@ npm run serve
 
 
 
+
+
 #### 11 Springboot MP代码生成器
 
 + 引入pom的配置文件
@@ -129,6 +131,21 @@ npm run serve
     <artifactId>springfox-boot-starter</artifactId>
     <version>3.0.0</version>
 </dependency>
+
+<dependency>
+    <groupId>org.apache.velocity</groupId>
+    <artifactId>velocity-engine-core</artifactId>
+    <version>2.0</version>
+</dependency>
 ```
 
-+ 
++ 编写utils.CodeGenerator.java进行配置
++ 注意备份后再使用自动生成
++ 自定义Controller生成规范：使用controller.java.vm文件
+
+
+
+
+
+
+
