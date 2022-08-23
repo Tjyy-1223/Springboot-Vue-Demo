@@ -38,8 +38,13 @@ public class UserController {
         Page<User> pageInfo = new Page<>(pageNum,pageSize);
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(StringUtils.isNotEmpty(username),User::getUsername,username);
-
+        queryWrapper.orderByDesc(User::getId);
         userService.page(pageInfo,queryWrapper);
         return pageInfo;
+    }
+
+    @DeleteMapping("/del/batch")
+    public boolean deleteBatch(@RequestBody List<Integer> ids){
+        return userService.removeByIds(ids);
     }
 }
