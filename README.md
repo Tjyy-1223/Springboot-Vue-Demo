@@ -75,3 +75,19 @@ npm run serve
 
 
 
+
+
+#### 7 Springboot使用增删改查
+
+使用Mybatis Plus可以大幅度简化代码量
+
++ postman工具的使用
++ 使用mybatis注解完成增删改查
++ 扫描mapper xml文件
+
+
+
+
+
+
+
