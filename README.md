@@ -110,3 +110,25 @@ npm run serve
 + 新增按钮功能实现
 + 编辑和删除按钮功能实现
 + 批量删除按钮功能实现(删除弹出框的使用)
+
+
+
+#### 11 Springboot MP代码生成器
+
++ 引入pom的配置文件
+
+```
+<dependency>
+    <groupId>com.baomidou</groupId>
+    <artifactId>mybatis-plus-generator</artifactId>
+    <version>3.5.1</version>
+</dependency>
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-boot-starter</artifactId>
+    <version>3.0.0</version>
+</dependency>
+```
+
++ 
