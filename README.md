@@ -89,5 +89,14 @@ npm run serve
 
 
 
+#### 8 Springboot实现分页查询
+
++ 可以使用MP的分页功能快速实现
+
++ 与前端vue分页功能的交互实现
++ 解决Vue-fetch时8080端口和9090端口间的跨域问题
++ Vue前端获取数据 与 页面展示数据的 v-model绑定
++ username搜索按钮实现
+
 
 

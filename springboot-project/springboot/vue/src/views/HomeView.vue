@@ -74,10 +74,10 @@
 
         <el-main>
           <div style="margin: 10px 0">
-            <el-input style="width: 200px"  placeholder="input name" suffix-icon="el-icon-search" class="ml-5"></el-input>
+            <el-input style="width: 200px"  placeholder="input name" suffix-icon="el-icon-search" class="ml-5" v-model="username"></el-input>
             <el-input style="width: 200px"  placeholder="input email" suffix-icon="el-icon-message" class="ml-5"></el-input>
             <el-input style="width: 200px"  placeholder="input address" suffix-icon="el-icon-position" class="ml-5"></el-input>
-            <el-button class="ml-5" type="primary">搜索</el-button>
+            <el-button class="ml-5" type="primary" @click="load">搜索</el-button>
           </div>
 
           <div style="margin: 10px 0">
@@ -88,11 +88,13 @@
           </div>
 
           <el-table :data="tableData" border stripe header-cell-class-name="headerBg">
-            <el-table-column prop="date" label="日期" width="140"></el-table-column>
-            <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+            <el-table-column prop="id" label="ID" width="80"></el-table-column>
+            <el-table-column prop="username" label="用户名" width="100"></el-table-column>
+            <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
             <el-table-column prop="address" label="地址"></el-table-column>
-
-            <el-table-column>
+            <el-table-column prop="eamil" label="邮箱"></el-table-column>
+            <el-table-column prop="phone" label="电话"></el-table-column>
+            <el-table-column label="操作" width="200" align="center">
               <template slot-scope="scope">
                   <el-button type="warning">编辑</el-button>
                   <el-button type="danger">删除</el-button>
@@ -103,10 +105,13 @@
 
           <div style="padding: 10px 0">
             <el-pagination
-                :page-sizes="[5, 10, 15, 20]"
-                :page-size="10"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="pageNum"
+                :page-sizes="[2, 10, 15, 20]"
+                :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :total="total">
             </el-pagination>
           </div>
         </el-main>
@@ -131,7 +136,11 @@ export default {
       };
 
       return {
-        tableData: Array(10).fill(item),
+        tableData: [],
+        total: 0,
+        pageNum: 1,
+        pageSize: 2,
+        username:"",
         msg: "hello tjyy",
         collapseBtnClass:'el-icon-s-fold',
         isCollapse:false,
@@ -139,7 +148,19 @@ export default {
         logoTextShow:true
       }
   },
+  created() {
+    // 请求分页查询数据
+    this.load()
+  },
   methods:{
+    load(){
+      fetch("http://localhost:9090/user/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize + "&username="+this.username).
+      then(res => res.json()).then(
+          res => {
+            this.tableData = res.records
+            this.total = res.total
+          })
+    },
     collapse(){
       this.isCollapse = !this.isCollapse
       if(this.isCollapse) {
@@ -147,6 +168,14 @@ export default {
       }else{
         this.logoTextShow = true
       }
+    },
+    handleSizeChange(pageSize){
+      this.pageSize = pageSize
+      this.load()
+    },
+    handleCurrentChange(pageNum){
+      this.pageNum = pageNum
+      this.load()
     }
   }
 }
