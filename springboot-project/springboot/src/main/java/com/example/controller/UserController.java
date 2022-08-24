@@ -5,6 +5,8 @@ import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.common.Constants;
+import com.example.common.Result;
 import com.example.controller.dto.UserDto;
 import com.example.entity.User;
 import com.example.service.UserService;
@@ -32,14 +34,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Boolean login(@RequestBody UserDto userDto){
+    public Result login(@RequestBody UserDto userDto){
         String username = userDto.getUsername();
         String password = userDto.getPassword();
 
         if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
-            return false;
+            return Result.error(Constants.CODE_401,"参数错误");
         }
-        return userService.login(userDto);
+        UserDto dto = userService.login(userDto);
+        return Result.success(dto);
     }
 
     @GetMapping

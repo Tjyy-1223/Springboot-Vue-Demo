@@ -1,11 +1,15 @@
 package com.example.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.Mapper.UserMapper;
+import com.example.common.Constants;
 import com.example.controller.dto.UserDto;
 import com.example.entity.User;
+import com.example.exception.ServiceException;
 import com.example.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,11 +42,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Boolean login(UserDto userDto) {
+    public UserDto login(UserDto userDto) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username",userDto.getUsername());
         queryWrapper.eq("password",userDto.getPassword());
         User one = getOne(queryWrapper);
-        return one != null;
+
+        if(one != null){
+            BeanUtil.copyProperties(one,userDto,true);
+            return userDto;
+        }else{
+            throw new ServiceException(Constants.CODE_500,"登录业务异常");
+        }
     }
 }

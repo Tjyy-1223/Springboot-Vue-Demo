@@ -13,5 +13,5 @@ public interface UserService extends IService<User> {
 
     int myDeleteById(int id);
 
-    Boolean login(UserDto userDto);
+    UserDto login(UserDto userDto);
 }
