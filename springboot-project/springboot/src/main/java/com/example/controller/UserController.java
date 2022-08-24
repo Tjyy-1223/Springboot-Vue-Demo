@@ -1,5 +1,8 @@
 package com.example.controller;
 
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.entity.User;
@@ -7,7 +10,12 @@ import com.example.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 @RestController
@@ -46,5 +54,34 @@ public class UserController {
     @DeleteMapping("/del/batch")
     public boolean deleteBatch(@RequestBody List<Integer> ids){
         return userService.removeByIds(ids);
+    }
+
+
+    @GetMapping("/export")
+    public void export(HttpServletResponse response) throws Exception{
+        List<User> list = userService.list();
+
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+//        writer.addHeaderAlias("username","用户名");
+//        writer.addHeaderAlias("address","地址");
+
+        writer.write(list,true);
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
+
+        String fileName = URLEncoder.encode("用户信息","UTF-8");
+        response.setHeader("Content-Disposition","attachment;filename="+fileName+".xlsx");
+
+        ServletOutputStream out = response.getOutputStream();
+        writer.flush(out,true);
+        out.close();
+        writer.close();
+    }
+
+    @PostMapping("/import")
+    public void imp(MultipartFile file) throws Exception{
+        InputStream inputStream = file.getInputStream();
+        ExcelReader reader = ExcelUtil.getReader(inputStream);
+        List<User> users = reader.readAll(User.class);
+        System.out.println(users);
     }
 }
