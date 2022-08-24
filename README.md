@@ -147,5 +147,18 @@ npm run serve
 
 
 
+#### 12 Vue使用路由（切换栏的实现）
 
++ 更改主页面为Manager.vue，作为整体的管理界面
++ 更改router中的index.js配置
+
++ vue界面的拆分、引入，分模块化设计
++ vuex实现动态路径配置
+
+```
+1）配置 store/index.js
+2）配置 main.js
+3）配置 router/index.js 路由守卫
+4）header.vue中进行使用
+```
 
