@@ -1,7 +1,9 @@
 package com.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.Mapper.UserMapper;
+import com.example.controller.dto.UserDto;
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     public int myDeleteById(int id) {
         return userMapper.myDeleteById(id);
+    }
+
+    @Override
+    public Boolean login(UserDto userDto) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",userDto.getUsername());
+        queryWrapper.eq("password",userDto.getPassword());
+        User one = getOne(queryWrapper);
+        return one != null;
     }
 }

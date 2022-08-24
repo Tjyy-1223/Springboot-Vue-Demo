@@ -164,6 +164,8 @@ npm run serve
 
 
 
+
+
 #### 13 Springboot+Vue实现导入导出
 
 + 实现将数据导入excel表或者从excel表加载数据
@@ -173,4 +175,23 @@ npm run serve
 
 
 
+
+
 #### 14 Springboot和Vue实现用户登录
+
++ 编写login.vue登录界面并配置router.index接口
++ 登录方法login的后端代码编写开发
++ 登录按钮的绑定，以及验证成功的页面跳转
+
+```
+request.post("/user/login",this.user)
+```
+
++ 退出按钮进行绑定
+
+```
+<router-link to="/login" style="text-decoration: none">退出</router-link>
+```
+
+
+

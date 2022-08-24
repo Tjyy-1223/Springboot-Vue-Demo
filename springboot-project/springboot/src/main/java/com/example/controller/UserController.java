@@ -5,6 +5,7 @@ import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.controller.dto.UserDto;
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -28,6 +29,17 @@ public class UserController {
     @PostMapping
     public Integer save(@RequestBody User user){
         return userService.mySave(user);
+    }
+
+    @PostMapping("/login")
+    public Boolean login(@RequestBody UserDto userDto){
+        String username = userDto.getUsername();
+        String password = userDto.getPassword();
+
+        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+            return false;
+        }
+        return userService.login(userDto);
     }
 
     @GetMapping
@@ -84,4 +96,6 @@ public class UserController {
         List<User> users = reader.readAll(User.class);
         System.out.println(users);
     }
+
+
 }
