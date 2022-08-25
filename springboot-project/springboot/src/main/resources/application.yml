@@ -20,4 +20,8 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+files:
+  upload:
+    path: /Users/tianjiangyu/MyStudy/Java体系/10_Springboot-Vue/springboot-project/files/
+
 

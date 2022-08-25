@@ -260,4 +260,16 @@ config.headers['token'] = user.token;  // 设置请求头
 
 #### 
 
+
+
 #### 17 Springboot文件上传
+
++ FileController - 编写文件上传相关接口
++ 设计新的文件存储实体类MyFile，和相对应的数据库表sys_file
++ 编写上传文件接口
++ 编写下载文件接口（md5防止文件重复存储）
++ 编写File.vue接口，用于上传文件 (切换栏新增文件管理功能)
++ 编写Controller中其他功能接口
+
+
+

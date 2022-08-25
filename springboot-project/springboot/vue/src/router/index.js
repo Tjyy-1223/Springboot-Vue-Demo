@@ -13,7 +13,8 @@ const routes = [
     redirect:"/home",
     children:[
       {path: 'user', name: 'User', component: () => import('../views/User.vue'),},
-      {path: 'home', name: 'Home', component: () => import('../views/Home.vue'),}
+      {path: 'home', name: 'Home', component: () => import('../views/Home.vue'),},
+      {path: 'file', name: '文件管理', component: () => import('../views/File.vue'),}
     ]
   },
   {

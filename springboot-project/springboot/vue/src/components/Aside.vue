@@ -21,7 +21,12 @@
         <span>系统管理</span>
       </template>
       <el-menu-item index="/user">
-        用户管理
+        <i class="el-icon-s-custom"></i>
+        <span slot="title">用户管理</span>
+      </el-menu-item>
+      <el-menu-item index="/file">
+        <i class="el-icon-document"></i>
+        <span slot="title">文件管理</span>
       </el-menu-item>
 <!--      <el-menu-item-group>-->
 <!--        <template slot="title">分组一</template>-->

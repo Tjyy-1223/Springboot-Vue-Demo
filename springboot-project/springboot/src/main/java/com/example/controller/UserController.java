@@ -51,6 +51,7 @@ public class UserController {
         return userService.myFindAll();
     }
 
+
     @DeleteMapping("/{id}")
     public int delete(@PathVariable Integer id){
         return userService.myDeleteById(id);
@@ -65,12 +66,14 @@ public class UserController {
         queryWrapper.orderByDesc(User::getId);
 
         // 获取user信息的方法
-        User currentUser = TokenUtils.getCurrentUser();
-        System.out.println(currentUser.getNickname());
+//        User currentUser = TokenUtils.getCurrentUser();
+//        System.out.println(currentUser.getNickname());
 
         userService.page(pageInfo,queryWrapper);
         return pageInfo;
     }
+
+
 
     @DeleteMapping("/del/batch")
     public boolean deleteBatch(@RequestBody List<Integer> ids){
