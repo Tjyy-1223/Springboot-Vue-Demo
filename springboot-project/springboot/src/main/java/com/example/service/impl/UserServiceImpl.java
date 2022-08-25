@@ -9,6 +9,7 @@ import com.example.controller.dto.UserDto;
 import com.example.entity.User;
 import com.example.exception.ServiceException;
 import com.example.service.UserService;
+import com.example.utils.TokenUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         if(one != null){
             BeanUtil.copyProperties(one,userDto,true);
+            String token = TokenUtils.getToken(one.getId().toString(), one.getPassword());
+            userDto.setToken(token);
             return userDto;
         }else{
             throw new ServiceException(Constants.CODE_500,"登录业务异常");

@@ -210,7 +210,53 @@ request.post("/user/login",this.user)
 
 
 
-#### 16 Springboot集成JWT
+#### 16 Springboot集成JWT（JSON WEB TOKEN）
+
++ 学习session原理和JWT原理
+
+Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准。该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景，**可以在有效期间内一直登录**。
+
+优点：
+
++ 简洁，数据量小，传输速度快
++ 自包含：负载中可以包含用户需要的信息，避免了多次查询数据库
++ 因为以JSON加密保存在客户端，任何语言都可以支持
++ 不需要在服务端保存会话信息，特别适合分布式微服务
+
+实现步骤：
+
++ 导入pom配置
+
+```
+<dependency>
+    <groupId>com.auth0</groupId>
+    <artifactId>java-jwt</artifactId>
+    <version>3.10.0</version>
+</dependency>
+```
+
++ utils/TokenUtils中编写生成token的相关代码
++ login的登录返回时 - 将UserDto的token返回给客户端
++ request.js中配置token
+
+```
+config.headers['token'] = user.token;  // 设置请求头
+```
+
++ 设计拦截器 interceptor/JwInterceptor
++ 配置config/InterceptorConfig
+
+如果直接new JwInterceptor()，则JwInterceptor不是有JAVA Bean进行管理，不能对其中的Bean对象进行自动注入。需要使用如下方法：
+
+```
+		@Bean
+    public JwInterceptor jwtInterceptor(){
+        return new JwInterceptor();
+    }
+```
+
++ 在request.js的response拦截器中接口响应后统一处理结果
++ TokenUtils.java文件中 - 展示如何在后端代码中获取jwt中的token数据
 
 #### 
 

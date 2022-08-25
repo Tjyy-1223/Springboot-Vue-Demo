@@ -10,6 +10,7 @@ import com.example.common.Result;
 import com.example.controller.dto.UserDto;
 import com.example.entity.User;
 import com.example.service.UserService;
+import com.example.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +63,11 @@ public class UserController {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(StringUtils.isNotEmpty(username),User::getUsername,username);
         queryWrapper.orderByDesc(User::getId);
+
+        // 获取user信息的方法
+        User currentUser = TokenUtils.getCurrentUser();
+        System.out.println(currentUser.getNickname());
+
         userService.page(pageInfo,queryWrapper);
         return pageInfo;
     }
