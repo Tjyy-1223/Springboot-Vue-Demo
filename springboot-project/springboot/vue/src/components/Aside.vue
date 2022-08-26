@@ -28,6 +28,14 @@
         <i class="el-icon-document"></i>
         <span slot="title">文件管理</span>
       </el-menu-item>
+      <el-menu-item index="/role">
+        <i class="el-icon-s-custom"></i>
+        <span slot="title">角色管理</span>
+      </el-menu-item>
+      <el-menu-item index="/menu">
+        <i class="el-icon-s-custom"></i>
+        <span slot="title">菜单管理</span>
+      </el-menu-item>
 <!--      <el-menu-item-group>-->
 <!--        <template slot="title">分组一</template>-->
 <!--        <el-menu-item index="2-2">选项2</el-menu-item>-->
