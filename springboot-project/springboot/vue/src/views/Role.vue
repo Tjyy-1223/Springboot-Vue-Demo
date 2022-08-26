@@ -67,14 +67,16 @@
           show-checkbox
           @check-change="handleCheckChange"
           node-key="id"
-          :default-expanded-keys="[1,4]"
-          :default-checked-keys="[9,10]">
+          :default-expanded-keys="expands"
+          :default-checked-keys="checks"
+          ref="tree"
+      >
       </el-tree>
 
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="save">确 定</el-button>
+        <el-button type="primary" @click="saveRoleMenu()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -99,7 +101,10 @@ export default {
       menuData:[],
       props:{
         label:'name',
-      }
+      },
+      expands:[],
+      checks:[],
+      roleId:0
     }
   },
   created() {
@@ -144,6 +149,17 @@ export default {
         }
       })
     },
+    saveRoleMenu(){
+        request.post("/role/roleMenu/"+this.roleId,this.$refs.tree.getCheckedKeys()).then(res => {
+            if (res){
+              this.$message.success("绑定成功")
+              this.menuDialogVis = false
+            }else{
+              this.$message.error("绑定失败")
+            }
+            this.menuDialogVis = false
+        })
+    },
     handleEdit(row){
       this.form = row
       this.dialogFormVisible = true
@@ -178,14 +194,17 @@ export default {
     },
     selectMenu(roleId){
         this.menuDialogVis = true
-        request.get("/menu",{
-          params:{
-            name: this.name
-          }
-        }).
+        this.roleId = roleId
+        request.get("/menu",{params:{name: this.name}}).
         then(res => {
           this.menuData = res
+          this.expands = this.menuData.map(v => v.id)
         })
+
+      request.get("/role/roleMenu/"+roleId).
+      then(res => {
+        this.checks = res
+      })
     },
     handleCheckChange(data, checked, indeterminate) {
       console.log(data, checked, indeterminate);

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.management.relation.Role;
 import java.util.List;
 import com.example.service.ISysRoleService;
 import com.example.entity.SysRole;
@@ -48,6 +49,18 @@ public class SysRoleController {
     public Page<SysRole> findPage(@RequestParam Integer pageNum,
                                 @RequestParam Integer pageSize) {
         return sysRoleService.page(new Page<>(pageNum, pageSize));
+    }
+
+    @PostMapping("/roleMenu/{roleId}")
+    public Boolean roleMenu(@PathVariable int roleId, @RequestBody List<Integer> menuIds) {
+        sysRoleService.setRoleMenu(roleId,menuIds);
+        return true;
+    }
+
+
+    @GetMapping("/roleMenu/{roleId}")
+    public List<Integer> roleMenu(@PathVariable int roleId) {
+        return sysRoleService.getRoleMenu(roleId);
     }
 
 }
