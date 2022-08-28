@@ -7,7 +7,7 @@
 
 Demo呈现效果（部分功能没有完善）
 
-![image-20220828092520270](/Users/tianjiangyu/MyStudy/Java体系/10_Springboot-Vue/assets/image-20220828092520270-1650387.png)
+![image-20220828092520270](https://gitee.com/tianjiangyu/springboot-vue/blob/master/assets/image-20220828092520270.png)
 
 ```
 安装依赖 npm install
