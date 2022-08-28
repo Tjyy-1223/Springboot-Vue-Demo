@@ -36,6 +36,18 @@ const routes = [
     path:'/register',
     name:'Register',
     component:() => import('../views/Register')
+  },
+  {
+    path:'/front',
+    name:'Front',
+    component:() => import('../views/front/Front'),
+    children:[
+      {
+        path: 'home',
+        name: 'FrontHome',
+        component:()=>import('../views/front/home')
+      }
+    ]
   }
 ]
 
