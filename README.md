@@ -1,7 +1,19 @@
-# Springboot-Vue
+# Springboot-Vue Demo
 
 #### 介绍
-Springboot-Vue搭建后台管理系统
+学习使用Springboot-Vue搭建后台管理系统 - demo
+
+学习视频地址：https://www.bilibili.com/video/BV1U44y1W77D?p=1&vd_source=9a47b26e060b09ee3b6edc173c4809ea
+
+Demo呈现效果（部分功能没有完善）
+
+![image-20220828092520270](/Users/tianjiangyu/MyStudy/Java体系/10_Springboot-Vue/assets/image-20220828092520270.png)
+
+```
+安装依赖 npm install
+启动服务 npm run serve
+编译打包 npm run build
+```
 
 
 
